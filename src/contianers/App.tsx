@@ -34,7 +34,7 @@ const App: Component = () => {
       <CssBaseline />
       <div class="main">
         <Typography variant="h5">
-          GRAVITY
+          SolitTs
         </Typography>
       </div>
       <Router>
