@@ -2,10 +2,8 @@ import { Component, createSignal, createMemo } from "solid-js";
 import { Router, Route } from "@solidjs/router";
 import { ThemeProvider, CssBaseline, Typography } from "@suid/material";
 import { makePersisted } from "@solid-primitives/storage";
-
 import { darkTheme, lightTheme } from "../theme";
 import Home from "./Home";
-
 
 const App: Component = () => {
   const [themeMode, setThemeMode] = makePersisted(

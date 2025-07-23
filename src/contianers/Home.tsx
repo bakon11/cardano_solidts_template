@@ -1,40 +1,34 @@
-import { Component } from "solid-js";
-import { Typography, Container, Grid } from "@suid/material";
-import Header from "../components/Header/Header";
-import HomeCard1 from "../components/HomeCards/HomeCard1";
-import HomeCard2 from "../components/HomeCards/HomeCard2";
-import HomeCard3 from "../components/HomeCards/HomeCard3";
+import { Component } from 'solid-js';
+import { Container, Grid, Box } from '@suid/material';
+import Header from '../components/Header/Header';
+import HeroSection from '../components/HeroSection';
+import FeatureCardsSection from '../components/FeatureCardsSection';
+import StatisticsSection from '../components/StatisticsSection';
+import CTAButtonsSection from '../components/CTAButtonsSection';
+import HeroBannerSection from '../components/HeroBannerSection';
+import TopPerformersSection from '../components/TopPerformersSection';
+import AnnouncementBanner from '../components/AnnouncementBanner';
+import Footer from '../components/Footer';
+
 interface HomeProps {
-  themeMode: () => "dark" | "light";
-  setThemeMode: (mode: "dark" | "light") => void;
+  themeMode: () => 'dark' | 'light';
+  setThemeMode: (mode: 'dark' | 'light') => void;
 }
 
 const Home: Component<HomeProps> = (props) => {
   return (
     <>
       <Header themeMode={props.themeMode} setThemeMode={props.setThemeMode} />
-      <Container sx={{ padding: "20px" }}>
-        <Typography variant="h4" gutterBottom>
-          SolidTs started template for Cardano Dapps
-        </Typography>
-        <Typography variant="body1">
-          Easy themeing and design with @suid/material
-        </Typography>
-        <Typography variant="body1">
-          Cardano wallet connector included.
-        </Typography>
-        <Grid container spacing={4} sx={{ marginTop: "20px" }}>
-          <Grid item xs={12} md={6}>
-            <HomeCard1 />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <HomeCard2 />
-          </Grid>
-          <Grid item xs={12} md={12}>
-            <HomeCard3 />
-          </Grid>
-        </Grid>
-      </Container>
+      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        {/*<AnnouncementBanner />*/}
+        <HeroSection />
+        <FeatureCardsSection />
+        {/*<StatisticsSection />*/}
+        {/*<CTAButtonsSection />*/}
+        <HeroBannerSection />
+        <TopPerformersSection />
+        <Footer />
+      </Box>
     </>
   );
 };

@@ -1,0 +1,13 @@
+.MuiCardLight {
+    background-color: #F1F1F1;
+    background-size: 20px 20px;
+    border-radius: 26px;
+    /* box-shadow: 0 4px 20px rgba(103, 58, 183, 0.2); */
+}
+
+.MuiCardDark {
+    background-color: #000000;
+    background-size: 20px 20px;
+    border-radius: 26px;
+    /* box-shadow: 0 4px 20px rgba(103, 58, 183, 0.3); */
+}

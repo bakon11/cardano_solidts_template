@@ -10,9 +10,7 @@ export default defineConfig({
   },
   plugins: [
     nodePolyfills({
-      globals: {
-        global: true, // This polyfills the global object
-      },
+      globals: { global: false },
     }),
     topLevelAwait(), 
     suidPlugin(), 

@@ -15,7 +15,7 @@ export function CardanoWalletConnect() {
 
     return (
         <>
-			<CardanoWalletConnectComponent showName={true}/>
+			<CardanoWalletConnectComponent showName={true} buttonVariant='text' buttonColor='inherit' />
         </>
     );
 };
