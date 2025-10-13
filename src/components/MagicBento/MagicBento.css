@@ -1,0 +1,208 @@
+:root {
+	--hue: 27;
+	--sat: 69%;
+	--white: hsl(0, 0%, 100%);
+	--purple-primary: rgba(132, 0, 255, 1);
+	--purple-glow: rgba(132, 0, 255, 0.2);
+	--purple-border: rgba(132, 0, 255, 0.8);
+	--border-color: #392e4e;
+	--background-dark: #060010;
+	color-scheme: light dark;
+}
+
+/* previously .card-grid */
+.mb-card-grid {
+	--card-gap: 0.75rem;
+	display: grid;
+	gap: var(--card-gap);
+	padding: 0.75rem;
+}
+
+/* previously .card */
+.mb-card {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	position: relative;
+	aspect-ratio: 4/3;
+	min-height: 110px;
+	min-width: 0;
+	max-width: 100%;
+	padding: 0.65em 0.75em 0.85em;
+	border-radius: 14px;
+	border: 1px solid var(--border-color);
+	background: var(--background-dark);
+	font-weight: 400;
+	overflow: hidden;
+	transition: all 0.3s ease;
+	--glow-x: 50%;
+	--glow-y: 50%;
+	--glow-intensity: 0;
+	--glow-radius: 200px;
+}
+
+.mb-card > * + * {
+	margin-top: 0.45em;
+}
+
+.mb-card__content > * + * {
+	margin-top: 0.3em;
+}
+
+.mb-card__header {
+	gap: 0.5em;
+	margin-bottom: 0.15em;
+	display: flex;
+	position: relative;
+	color: var(--white);
+	justify-content: space-between;
+}
+
+.mb-card__content {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	color: var(--white);
+}
+
+.mb-card__label {
+	font-size: 11px;
+	padding: 2px 8px;
+	border-radius: 12px;
+	background: rgba(255,255,255,0.08);
+	backdrop-filter: blur(6px);
+}
+
+.mb-card__title {
+	font-size: 13px;
+	margin: 0 0 0.15em;
+	line-height: 1.15;
+	font-weight: 500;
+}
+
+.mb-card__description {
+	font-size: 11px;
+	line-height: 1.25;
+	margin: 0;
+}
+
+.mb-card--text-autohide .mb-card__title,
+.mb-card--text-autohide .mb-card__description {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.mb-card--text-autohide .mb-card__title {
+	-webkit-line-clamp: var(--clamp-title,1);
+	line-clamp: var(--clamp-title,1);
+}
+
+.mb-card--text-autohide .mb-card__description {
+	-webkit-line-clamp: var(--clamp-desc,2);
+	line-clamp: var(--clamp-desc,2);
+}
+
+/* Glow effect (renamed modifier) */
+.mb-card--border-glow::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	padding: 4px;
+	background: radial-gradient(
+		var(--glow-radius) circle at var(--glow-x) var(--glow-y),
+		rgba(132,0,255,calc(var(--glow-intensity) * 0.8)) 0%,
+		rgba(132,0,255,calc(var(--glow-intensity) * 0.4)) 30%,
+		transparent 60%
+	);
+	border-radius: inherit;
+	mask:
+		linear-gradient(#fff 0 0) content-box,
+		linear-gradient(#fff 0 0);
+	mask-composite: subtract;
+	-webkit-mask:
+		linear-gradient(#fff 0 0) content-box,
+		linear-gradient(#fff 0 0);
+	-webkit-mask-composite: xor;
+	pointer-events: none;
+	transition: opacity 0.3s ease;
+	z-index: 1;
+}
+
+.mb-card--border-glow:hover::after {
+	opacity: 1;
+}
+
+.mb-card--border-glow:hover {
+	box-shadow:
+		0 4px 20px rgba(46, 24, 78, 0.4),
+		0 0 30px var(--purple-glow);
+}
+
+.mb-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+}
+
+/* Particle container (namespaced if needed) */
+.particle-container {
+	position: relative;
+	overflow: hidden;
+}
+
+/* Spotlight (namespaced root still fine) */
+.global-spotlight {
+	mix-blend-mode: screen;
+	will-change: transform, opacity;
+	z-index: 200 !important;
+	pointer-events: none;
+}
+
+/* Section wrapper */
+.mb-bento-section {
+	position: relative;
+	user-select: none;
+}
+
+@media (max-width: 599px) {
+	.mb-card-grid {
+		grid-template-columns: 1fr;
+		width: 90%;
+		margin: 0 auto;
+		padding: 0.5em;
+	}
+	.mb-card {
+		min-height: 100px;
+		padding: 0.6em 0.7em 0.75em;
+	}
+}
+
+@media (min-width: 600px) {
+	.mb-card-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media (min-width: 1024px) {
+	.mb-card-grid {
+		grid-template-columns: repeat(5, 1fr);
+	}
+	.mb-card:nth-child(3),
+	.mb-card:nth-child(4),
+	.mb-card:nth-child(6) {
+		min-height: 240px;
+	}
+	.mb-card:nth-child(3) {
+		grid-column: span 2;
+		grid-row: span 2;
+	}
+	.mb-card:nth-child(4) {
+		grid-column: span 2;
+		grid-row: span 2;
+	}
+	.mb-card:nth-child(6) {
+		grid-column: span 1;
+		grid-row: span 2;
+	}
+}

@@ -1,0 +1,192 @@
+.card-swap-container {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	transform: translate(5%, 20%);
+	transform-origin: bottom right;
+	perspective: 900px;
+	overflow: visible;
+	--glow-color: 132, 0, 255;
+	--glow-intensity: 0;
+	--glow-x: 50%;
+	--glow-y: 50%;
+	--border-base: rgba(var(--glow-color), 0.18);
+	--border-strong: rgba(var(--glow-color), 0.55);
+	--inset-glow: rgba(var(--glow-color), 0.25);
+}
+
+.card-swap-container .card {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	border-radius: 12px;
+	border: 1px solid #fff;
+	background: #060010;
+	padding: 14px 16px 18px;
+	transform-style: preserve-3d;
+	will-change: transform;
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	box-shadow:
+		0 0 0 1px rgba(255, 255, 255, 0.04),
+		0 4px 18px -4px rgba(0, 0, 0, 0.65),
+		0 0 0 0 rgba(var(--glow-color), 0); /* animated in */
+	transition:
+		transform 0.35s cubic-bezier(0.22, 0.99, 0.39, 1),
+		box-shadow 0.4s ease,
+		border-color 0.4s ease;
+	--tilt-scale: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+/* Dynamic glow layer */
+.card-swap-container .card::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	background: radial-gradient(circle at var(--glow-x) var(--glow-y), rgba(var(--glow-color), 0.35) 0%, rgba(var(--glow-color), 0.15) 28%, transparent 60%);
+	opacity: var(--glow-intensity);
+	mix-blend-mode: screen;
+	transition: opacity 0.3s ease;
+}
+
+/* Subtle animated border aura */
+.card-swap-container .card::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	padding: 1px;
+	mask:
+		linear-gradient(#000, #000) content-box,
+		linear-gradient(#000, #000);
+	mask-composite: exclude;
+	background: conic-gradient(from 0deg, rgba(var(--glow-color), 0), rgba(var(--glow-color), 0.35), rgba(var(--glow-color), 0) 65%, rgba(var(--glow-color), 0.45) 75%, rgba(var(--glow-color), 0) 90%);
+	filter: blur(6px) brightness(0.9) contrast(1.1);
+	opacity: 0;
+	transition:
+		opacity 0.5s ease,
+		transform 1.6s linear;
+	animation: spin-glow 14s linear infinite;
+	pointer-events: none;
+}
+
+@keyframes spin-glow {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+/* Hover / focus intensity */
+.card-swap-container .card:hover,
+.card-swap-container .card:focus-within {
+	transform: translate(-50%, -50%) translateZ(40px) scale(var(--tilt-scale)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+	border-color: var(--border-strong);
+	box-shadow:
+		0 0 0 1px rgba(255, 255, 255, 0.07),
+		0 0 0 2px rgba(var(--glow-color), 0.25),
+		0 18px 46px -12px rgba(0, 0, 0, 0.75),
+		0 0 32px -4px rgba(var(--glow-color), 0.55),
+		0 0 60px -10px rgba(var(--glow-color), 0.35);
+	--glow-intensity: 1;
+}
+
+.card-swap-container .card:hover::before {
+	opacity: 0.9;
+}
+.card-swap-container .card:hover::after {
+	opacity: 1;
+}
+
+/* Interactive pointer tracking (optional JS hook can set --glow-x/--glow-y) */
+.card-swap-container .card {
+	/* fallback center if JS not updating */
+	--glow-x: 50%;
+	--glow-y: 50%;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	.card-swap-container .card,
+	.card-swap-container .card::before,
+	.card-swap-container .card::after {
+		animation: none !important;
+		transition: none !important;
+	}
+}
+
+/* Responsive existing scaling preserved */
+@media (max-width: 768px) {
+	.card-swap-container {
+		transform: scale(0.75) translate(25%, 25%);
+	}
+	.card-swap-container .card {
+		--tilt-scale: 0.92;
+	}
+}
+
+@media (max-width: 480px) {
+	.card-swap-container {
+		transform: scale(0.55) translate(25%, 25%);
+	}
+	.card-swap-container .card {
+		--tilt-scale: 0.88;
+	}
+}
+
+/* Compact internal layout & typography tightening */
+.card-swap-container .card {
+	/* override earlier padding if present */
+	padding: 14px 16px 18px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+/* Wrap content (add a wrapper div with class 'card-body' if present; falls back to card) */
+.card-swap-container .card-body,
+.card-swap-container .card {
+	gap: 6px; /* small consistent vertical rhythm */
+}
+
+/* Headings inside card */
+.card-swap-container .card h1,
+.card-swap-container .card h2,
+.card-swap-container .card h3,
+.card-swap-container .card h4,
+.card-swap-container .card h5,
+.card-swap-container .card h6 {
+	margin: 0;
+	line-height: 1.15;
+	font-weight: 600;
+}
+
+/* Paragraph / descriptive text */
+.card-swap-container .card p,
+.card-swap-container .card .card-text {
+	margin: 0;
+	line-height: 1.35;
+	opacity: 0.85;
+}
+
+/* Optional tighter mode if you add data-compact="true" to a card */
+.card-swap-container .card[data-compact="true"] {
+	gap: 4px;
+}
+.card-swap-container .card[data-compact="true"] h1,
+.card-swap-container .card[data-compact="true"] h2,
+.card-swap-container .card[data-compact="true"] h3 {
+	line-height: 1.1;
+}
+.card-swap-container .card[data-compact="true"] p {
+	line-height: 1.3;
+}
+
+/* If you have a footer / meta block, push it to bottom cleanly */
+.card-swap-container .card-footer {
+	margin-top: auto;
+	padding-top: 8px;
+}

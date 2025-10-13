@@ -1,0 +1,4 @@
+this for the landing section (red veil) https://reactbits.dev/backgrounds/dark-veil
+then a section for "our services" with this https://reactbits.dev/components/scroll-stack
+then a section with "our projects" with this (including pebble, gerolamo, babel-fees, etc...) https://reactbits.dev/components/card-swap
+then a section with "the team" using this https://reactbits.dev/components/profile-card

@@ -1,0 +1,124 @@
+.chroma-grid {
+	position: relative;
+	width: 100%;
+	--x: 50%;
+	--y: 50%;
+}
+
+.chroma-card {
+	border: 2px solid var(--card-border);
+	background: var(--card-gradient);
+	border-radius: 12px;
+	overflow: hidden;
+	transition: transform 0.3s ease;
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.chroma-card:hover {
+	transform: scale(1);
+}
+
+.chroma-card::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 70%);
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 0.5s ease;
+	z-index: 2;
+}
+
+.chroma-card:hover::before {
+	opacity: 1;
+}
+
+.chroma-img-wrapper {
+	width: 100%;
+	height: 60%;
+	overflow: hidden;
+}
+
+.chroma-img-wrapper img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.chroma-info {
+	padding: 15px;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.name {
+	font-size: 1.2em;
+	font-weight: bold;
+	margin: 0 0 5px 0;
+	color: white;
+}
+
+.handle {
+	font-size: 0.9em;
+	color: #ccc;
+	margin-bottom: 5px;
+}
+
+.role {
+	font-size: 1em;
+	color: #fff;
+	margin: 0;
+}
+
+.location {
+	font-size: 0.8em;
+	color: #aaa;
+	margin-top: 5px;
+}
+
+.chroma-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: radial-gradient(circle var(--r) at var(--x) var(--y), transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+	pointer-events: none;
+	z-index: 10;
+}
+
+.chroma-fade {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 900%;
+	background: rgba(0, 0, 0, 0.3);
+	opacity: 1;
+	pointer-events: none;
+	z-index: 5;
+}
+
+.chroma-cards {
+	/* centered fixed-width columns */
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 260px));
+	justify-content: center; /* centers the grid tracks */
+	gap: 24px;
+	width: 100%;
+	position: relative;
+	z-index: 3;
+}
+
+@media (max-width: 600px) {
+	.chroma-cards {
+		grid-template-columns: repeat(auto-fit, minmax(200px, 200px));
+		justify-content: center;
+		gap: 16px;
+	}
+}

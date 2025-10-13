@@ -1,7 +1,7 @@
 {
-  "name": "solidts-template",
+  "name": "harmonic-laboratories-website",
   "version": "0.0.0",
-  "description": "",
+  "description": "Website for Harmonic Laboratories",
   "type": "module",
   "scripts": {
     "start": "vite",
@@ -12,25 +12,35 @@
   "license": "MIT",
   "devDependencies": {
     "@suid/types": "^0.8.0",
-    "@suid/vite-plugin": "^0.4.1",
-    "typescript": "^5.8.3",
-    "vite": "^6.3.5",
+    "typescript": "^5.9.3",
+    "vite": "^6.3.6",
     "vite-plugin-node-polyfills": "^0.24.0",
-    "vite-plugin-solid": "^2.11.7",
-    "vite-plugin-top-level-await": "^1.6.0"
+    "vite-plugin-solid": "^2.11.9",
+    "vite-plugin-top-level-await": "^1.6.0",
+    "prettier": "^3.3.3"
   },
   "dependencies": {
-    "@harmoniclabs/blockfrost-pluts": "^0.2.4",
-    "@harmoniclabs/buildooor": "^0.1.16",
+    "@babel/traverse": "^7.28.4",
+    "@harmoniclabs/blockfrost-pluts": "^0.2.6",
+    "@harmoniclabs/buildooor": "^0.1.20",
+    "@motionone/dom": "^10.18.0",
+    "@motionone/solid": "^10.16.4",
     "@solidjs/router": "^0.15.3",
     "@suid/css": "^0.4.1",
     "@suid/icons-material": "^0.9.0",
     "@suid/material": "^0.19.0",
     "@suid/site": "^0.21.2",
+    "@suid/vite-plugin": "^0.4.1",
     "bip39": "^3.1.0",
     "cardano-wallet-connect-solidjs-component": "file:cardano-wallet-connect-solidjs-component-0.0.5.tgz",
+    "framer-motion": "^12.23.24",
+    "gsap": "^3.13.0",
+    "lenis": "^1.3.11",
+    "motion": "^12.23.24",
+    "ogl": "^1.0.11",
     "opbeta": "npm:open-props@^2.0.0-beta.5",
-    "solid-js": "^1.9.7",
+    "solid-js": "^1.9.9",
+    "solid-motion": "^1.0.0-alpha.8",
     "unenv": "^1.10.0"
   }
 }
